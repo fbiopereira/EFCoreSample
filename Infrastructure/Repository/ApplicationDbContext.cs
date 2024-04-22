@@ -1,6 +1,6 @@
 ﻿using Core.Entity;
-using Infrastructure.Repository.Configurations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Repository
 {
@@ -10,7 +10,12 @@ namespace Infrastructure.Repository
 
         public ApplicationDbContext()
         {
-                
+            //NECESSARIO ADICIONAR O CONFIGURATION POIS A INJEÇÃO DE DEPENDENCIA NÃO FUNCIONA NO CONSTRUTOR COM PARAMETROS
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+            _connectionString = configuration.GetConnectionString("ConnectionString");
         }
 
         public ApplicationDbContext(string connectionString)

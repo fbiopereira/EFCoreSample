@@ -14,7 +14,9 @@ namespace Infrastructure.Repository.Configurations
         {
             builder.ToTable("Pedido");
             builder.HasKey(p => p.Id);
-            builder.Property(p => p.Id).HasColumnType("INT").ValueGeneratedNever().UseIdentityColumn();
+            // builder.Property(p => p.Id).HasColumnType("INT").ValueGeneratedNever().UseIdentityColumn();
+            // NO SQL SERVER NAO É MAIS NECESSÁRIO O VALUEGENERATEDNEVER
+            builder.Property(p => p.Id).HasColumnType("INT").UseIdentityColumn();
             builder.Property(p => p.CreationDate).HasColumnType("DATETIME").HasColumnName("DataCriacao").IsRequired();
             builder.Property(p => p.ClientId).HasColumnType("INT").HasColumnName("IdCliente").IsRequired();
             builder.Property(p => p.BookId).HasColumnType("INT").HasColumnName("IdLivro").IsRequired();            
