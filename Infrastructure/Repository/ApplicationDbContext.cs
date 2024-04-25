@@ -33,6 +33,7 @@ namespace Infrastructure.Repository
             {
 
                 optionsBuilder.UseSqlServer(_connectionString);
+                optionsBuilder.UseLazyLoadingProxies();
 
             }
         }
